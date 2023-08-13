@@ -2,7 +2,8 @@ const body = document.querySelector('body');
 const buttonStart = document.querySelector('button[data-start]');
 const buttonStop = document.querySelector('button[data-stop]');
 buttonStop.disabled = true;
-console.log('hello');
+
+buttonStart.addEventListener('click', handleClick);
 
 //Генеруємо випадковий колір
 function getRandomHexColor() {
@@ -16,16 +17,11 @@ const handleClick = () => {
   timerId = setInterval(() => {
     body.style.backgroundColor = getRandomHexColor();
   }, 1000);
-  buttonStop.disabled = false;
   buttonStart.disabled = true;
+  buttonStop.disabled = false;
 };
 
 //Ставимо слухача на кнопку стоп
 buttonStop.addEventListener('click', () => {
   clearInterval(timerId);
-  buttonStop.disabled = true;
-  buttonStart.disabled = false;
 });
-
-//Ставимо слухача на кнопку старт
-buttonStart.addEventListener('click', handleClick);
