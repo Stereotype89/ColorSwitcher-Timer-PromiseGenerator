@@ -2,6 +2,7 @@ const body = document.querySelector('body');
 const buttonStart = document.querySelector('button[data-start]');
 const buttonStop = document.querySelector('button[data-stop]');
 buttonStop.disabled = true;
+let bodyHexColor = null;
 
 buttonStart.addEventListener('click', onStartBtnClick);
 buttonStop.addEventListener('click', onStopBtnClick);
