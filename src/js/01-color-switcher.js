@@ -3,25 +3,23 @@ const buttonStart = document.querySelector('button[data-start]');
 const buttonStop = document.querySelector('button[data-stop]');
 buttonStop.disabled = true;
 
-buttonStart.addEventListener('click', handleClick);
+buttonStart.addEventListener('click', onStartBtnClick);
+buttonStop.addEventListener('click', onStopBtnClick);
 
-//Генеруємо випадковий колір
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, 0)}`;
+function onStartBtnClick(e) {
+  buttonStart.setAttribute('disabled', true);
+  buttonStop.removeAttribute('disabled');
+  bodyHexColor = setInterval(() => {
+    body.style.background = getRandomHexColor();
+  }, 1000);
 }
 
-//Створюємо колбек функцію для зміни фону боді з інтервалом повтору в 1 секунду
-const handleClick = () => {
-  timerId = setInterval(() => {
-    body.style.backgroundColor = getRandomHexColor();
-  }, 1000);
-  buttonStart.disabled = true;
-  buttonStop.disabled = false;
-};
+function onStopBtnClick(e) {
+  buttonStop.setAttribute('disabled', true);
+  buttonStart.removeAttribute('disabled');
+  clearInterval(bodyHexColor);
+}
 
-//Ставимо слухача на кнопку стоп
-buttonStop.addEventListener('click', () => {
-  clearInterval(timerId);
-});
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+}
